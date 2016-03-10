@@ -35,11 +35,19 @@ Given /^the blog is set up$/ do
   Blog.default.update_attributes!({:blog_name => 'Teh Blag',
                                    :base_url => 'http://localhost:3000'});
   Blog.default.save!
+  # create admin
   User.create!({:login => 'admin',
                 :password => 'aaaaaaaa',
                 :email => 'joe@snow.com',
                 :profile_id => 1,
                 :name => 'admin',
+                :state => 'active'})
+  # create contributor
+  User.create!({:login => 'tiffany',
+                :password => 'aaaaaaaa',
+                :email => 'thlam@berkeley.edu',
+                :profile_id => 2,
+                :name => 'Tiffany',
                 :state => 'active'})
 end
 
