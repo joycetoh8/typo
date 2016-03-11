@@ -243,7 +243,7 @@ class Admin::ContentController < Admin::BaseController
   end
   
   def merge_articles
-    merge_id = params[merge_id]
+    merge_id = params[:merge_id]
     Article.merge(merge_id)
     index
   end

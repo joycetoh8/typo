@@ -63,6 +63,10 @@ And /^I am logged into the admin panel$/ do
   end
 end
 
+Given /^I have logged out$/ do
+  visit '/accounts/logout'
+end
+
 # Single-line step scoper
 When /^(.*) within (.*[^:])$/ do |step, parent|
   with_scope(parent) { When step }

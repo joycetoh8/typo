@@ -32,7 +32,8 @@ Feature: Merge Articles
     And I fill in "article__body_and_extended_editor" with "Lorem Ipsum"
     And I press "Publish"
 
-    Given I am logged into the admin panel 
+    Given I have logged out
+    When I am logged into the admin panel 
     And I follow "New Article"
     When I fill in "article_title" with "Foobar2"
     And I fill in "article__body_and_extended_editor" with "Second body."
@@ -53,7 +54,7 @@ Feature: Merge Articles
     When I am on the manage articles page
     And I follow "Foobar"
     Then I should see "Merge Articles"
-    When I fill in "Article ID" with "11" 
+    When I fill in "merge_id" with "3" 
     And I press "Merge"
     Then I should be on the manage articles page #needs path
     #checks title
