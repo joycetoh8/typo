@@ -5,6 +5,12 @@ class Admin::ContentController < Admin::BaseController
   layout "administration", :except => [:show, :autosave]
 
   cache_sweeper :blog_sweeper
+  
+  def merge_articles
+    merge_id = params[:merge_id]
+    Article.merge(merge_id)
+    index
+  end
 
   def auto_complete_for_article_keywords
     @items = Tag.find_with_char params[:article][:keywords].strip
@@ -242,10 +248,5 @@ class Admin::ContentController < Admin::BaseController
     @resources = Resource.by_created_at
   end
   
-  def merge_articles
-    merge_id = params[:merge_id]
-    Article.merge(merge_id)
-    index
-  end
   
 end
