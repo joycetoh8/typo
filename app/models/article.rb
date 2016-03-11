@@ -466,4 +466,13 @@ class Article < Content
     to = to - 1 # pull off 1 second so we don't overlap onto the next day
     return from..to
   end
+  
+  def self.merge(merge_id)
+    # article_to_merge = Article.find(merge_id)
+    # merge body but keep same author and title
+    # self.body = self.body + article_to_merge.body
+    # merge comments
+    self.body = "THIS IS JOYCE"
+    Article.destroy(merge_id)
+  end
 end
