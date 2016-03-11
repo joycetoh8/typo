@@ -26,3 +26,8 @@ And /^I am logged into a non-admin panel$/ do
     assert page.has_content?('Login successful')
   end
 end
+
+When /^(?:|I )click on "([^"]*)"$/ do |link|
+  find('a', :text => link).click
+end
+
