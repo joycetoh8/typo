@@ -180,6 +180,7 @@ class Admin::ContentController < Admin::BaseController
     @images = Resource.images_by_created_at.page(params[:page]).per(10)
     @resources = Resource.without_images_by_filename
     @macros = TextFilter.macro_filters
+    @merge = current_user.admin?
     render 'new'
   end
 
@@ -239,5 +240,8 @@ class Admin::ContentController < Admin::BaseController
 
   def setup_resources
     @resources = Resource.by_created_at
+  end
+  
+  def merge_articles
   end
 end
