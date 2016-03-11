@@ -7,9 +7,10 @@ class Admin::ContentController < Admin::BaseController
   cache_sweeper :blog_sweeper
   
   def merge_articles
-    merge_id = params[:merge_id]
-    Article.merge(merge_id)
-    index
+    curr_article = Article.find(params[:id])
+    article_to_merge = Article.find(params[:merge_id])
+    Article.merge(curr_article,article_to_merge)
+    redirect_to :action => 'index'
   end
 
   def auto_complete_for_article_keywords
@@ -247,6 +248,5 @@ class Admin::ContentController < Admin::BaseController
   def setup_resources
     @resources = Resource.by_created_at
   end
-  
   
 end

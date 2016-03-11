@@ -467,12 +467,17 @@ class Article < Content
     return from..to
   end
   
-  def self.merge(merge_id)
-    # article_to_merge = Article.find(merge_id)
-    # merge body but keep same author and title
-    # self.body = self.body + article_to_merge.body
-    # merge comments
-    self.body = "THIS IS JOYCE"
-    Article.destroy(merge_id)
+  def self.merge(curr_article,article_to_merge)
+    #merge body but keep same author and title
+    curr_article.body = curr_article.body + article_to_merge.body
+    curr_article.save!
+    #delete other article
+    article_to_merge.destroy
+    #merge comments
+   
+   
+    # curr_article.body = "HELLO THIS IS JOYCE"
+    # curr_article.save!
+    # article_to_merge.body = "HELLO THIS IS ALSO JOYCE"
   end
 end

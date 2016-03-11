@@ -56,7 +56,7 @@ Feature: Merge Articles
     Then I should see "Merge Articles"
     When I fill in "merge_id" with "3" 
     And I press "Merge"
-    Then I should be on the manage articles page #needs path
+    Then I should be on the manage articles page
     #checks title
     And I should see "Foobar"
     And I should not see "Foobar2"
