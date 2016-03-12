@@ -415,6 +415,19 @@ class Article < Content
   def access_by?(user)
     user.admin? || user_id == user.id
   end
+  
+  def merge_with(other_article_id)
+    #merge body but keep same author and title
+    #curr_article.body = curr_article.body + article_to_merge.body
+    #curr_article.save!
+    other_article = Article.find(other_article_id)
+    self.body << other_article.body
+    self.save
+    #delete other article
+    other_article.destroy
+    return self
+    #merge comments
+  end
 
   protected
 
@@ -466,18 +479,5 @@ class Article < Content
     to = to - 1 # pull off 1 second so we don't overlap onto the next day
     return from..to
   end
-  
-  def self.merge(curr_article,article_to_merge)
-    #merge body but keep same author and title
-    curr_article.body = curr_article.body + article_to_merge.body
-    curr_article.save!
-    #delete other article
-    article_to_merge.destroy
-    #merge comments
    
-   
-    # curr_article.body = "HELLO THIS IS JOYCE"
-    # curr_article.save!
-    # article_to_merge.body = "HELLO THIS IS ALSO JOYCE"
-  end
 end
