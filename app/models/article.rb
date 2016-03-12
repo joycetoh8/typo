@@ -416,17 +416,19 @@ class Article < Content
     user.admin? || user_id == user.id
   end
   
-  def merge_with(other_article_id)
+  def merge_with(merge_id)
     #merge body but keep same author and title
-    #curr_article.body = curr_article.body + article_to_merge.body
-    #curr_article.save!
-    other_article = Article.find(other_article_id)
-    self.body << other_article.body
-    self.save
+    article_to_merge = Article.find(merge_id)
+    self.body << article_to_merge.body
+    self.save!
+    #merge comments - to be implemented
+    comments_to_merge = Comment.where(article_id: merge_id)
+    comments_to_merge.each do |comment_to_merge|
+      comment_to_merge.article_id = params[:id]
+      comment_to_merge.save
+    end
     #delete other article
-    other_article.destroy
-    return self
-    #merge comments
+    article_to_merge.destroy
   end
 
   protected

@@ -7,10 +7,10 @@ class Admin::ContentController < Admin::BaseController
   cache_sweeper :blog_sweeper
   
   def merge_articles
-    #article_to_merge = Article.find(params[:merge_id])
-    Article.find(params[:id]).merge_with(params[:merge_id])
-    # flash[:warning] = "#{curr_article.title} and #{article_to_merge.title}"
-    redirect_to '/admin/content' #:action => 'index'
+    @article = Article.find(params[:id])
+    @article.merge_with params[:merge_id]
+
+    redirect_to :action => 'index'
   end
 
   def auto_complete_for_article_keywords
