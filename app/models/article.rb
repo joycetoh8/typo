@@ -419,7 +419,7 @@ class Article < Content
   def merge_with(merge_id)
     #merge body but keep same author and title
     article_to_merge = Article.find(merge_id)
-    self.body << article_to_merge.body
+    self.body = self.body + article_to_merge.body
     self.save!
     #merge comments - to be implemented
     comments_to_merge = Comment.where(article_id: merge_id)
