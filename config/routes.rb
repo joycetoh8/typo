@@ -6,7 +6,7 @@ Rails.application.routes.draw do
       require File.join(dir, "config", "routes.rb")
     end
   end
-
+  
   # for CK Editor
   match 'fm/filemanager(/:action(/:id))', :to => 'Fm::Filemanager', :format => false
   match 'ckeditor/command', :to => 'ckeditor#command', :format => false
@@ -68,8 +68,6 @@ Rails.application.routes.draw do
   match 'articles/markup_help/:id', :to => 'articles#markup_help', :format => false
   match 'articles/tag', :to => 'articles#tag', :format => false
   match 'articles/category', :to => 'articles#category', :format => false
-  #match '/merge', :to => 'content#merge_articles', :as => :merge
-  #match '/merge',      :to => 'content#merge_articles',        via: 'post'
   
 
   # SetupController
@@ -114,6 +112,8 @@ Rails.application.routes.draw do
     match "/admin/#{i}", :to => "admin/#{i}#index", :format => false
     match "/admin/#{i}(/:action(/:id))", :to => "admin/#{i}", :action => nil, :id => nil, :format => false
   end
+  
+  match "/admin/content/merge_articles(/:id)", :to => "admin/content#merge_articles", :as => "merge_articles"
 
   # default
   root :to  => 'articles#index', :format => false

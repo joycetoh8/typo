@@ -424,7 +424,7 @@ class Article < Content
     #merge comments - to be implemented
     comments_to_merge = Comment.where(article_id: merge_id)
     comments_to_merge.each do |comment_to_merge|
-      comment_to_merge.article_id = params[:id]
+      comment_to_merge.article_id = self.id
       comment_to_merge.save
     end
     #delete other article
